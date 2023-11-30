@@ -5,6 +5,7 @@ import 'package:flutter_sixvalley_ecommerce/data/model/response/base/api_respons
 import 'package:flutter_sixvalley_ecommerce/main.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/splash_provider.dart';
 import 'package:flutter_sixvalley_ecommerce/utill/app_constants.dart';
+// ignore: unused_import
 import 'package:flutter_sixvalley_ecommerce/view/basewidget/show_custom_snakbar.dart';
 import 'package:provider/provider.dart';
 
@@ -14,7 +15,8 @@ class WalletTransactionRepo {
 
   Future<ApiResponse> getWalletTransactionList(int offset, type) async {
     try {
-      Response response = await dioClient!.get('${AppConstants.walletTransactionUri}$offset&transaction_type=$type');
+      Response response = await dioClient!.get(
+          '${AppConstants.walletTransactionUri}$offset&transaction_type=$type');
       return ApiResponse.withSuccess(response);
     } catch (e) {
       return ApiResponse.withError(ApiErrorHandler.getMessage(e));
@@ -23,7 +25,8 @@ class WalletTransactionRepo {
 
   Future<ApiResponse> getLoyaltyPointList(int offset) async {
     try {
-      Response response = await dioClient!.get('${AppConstants.loyaltyPointUri}$offset');
+      Response response =
+          await dioClient!.get('${AppConstants.loyaltyPointUri}$offset');
       return ApiResponse.withSuccess(response);
     } catch (e) {
       return ApiResponse.withError(ApiErrorHandler.getMessage(e));
@@ -41,22 +44,29 @@ class WalletTransactionRepo {
       return ApiResponse.withError(ApiErrorHandler.getMessage(e));
     }
   }
-  Future<ApiResponse> addFundToWallet(String amount, String paymentMethod) async {
-    try {
-      print("==============Currency====> ${Provider.of<SplashProvider>(Get.context!, listen: false).myCurrency!.code}");
-      final response = await dioClient!.post(AppConstants.addFundToWallet,
-          data: {'payment_platform': 'app',
-            'payment_method' : paymentMethod,
-            'payment_request_from': 'app',
-            'amount': amount,
-            'current_currency_code': Provider.of<SplashProvider>(Get.context!, listen: false).myCurrency!.code
 
-          });
+  Future<ApiResponse> addFundToWallet(
+      String amount, String paymentMethod) async {
+    try {
+      print(
+          "==============Currency====> ${Provider.of<SplashProvider>(Get.context!, listen: false).myCurrency!.code}");
+      final response =
+          await dioClient!.post(AppConstants.addFundToWallet, data: {
+        'payment_platform': 'app',
+        'payment_method': paymentMethod,
+        'payment_request_from': 'app',
+        'amount': amount,
+        'current_currency_code':
+            Provider.of<SplashProvider>(Get.context!, listen: false)
+                .myCurrency!
+                .code
+      });
       return ApiResponse.withSuccess(response);
     } catch (e) {
       return ApiResponse.withError(ApiErrorHandler.getMessage(e));
     }
   }
+
   Future<ApiResponse> getWalletBonusBannerList() async {
     try {
       Response response = await dioClient!.get(AppConstants.walletBonusList);
