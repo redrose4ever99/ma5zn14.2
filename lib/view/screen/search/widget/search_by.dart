@@ -1,4 +1,3 @@
-import 'package:flutter_sixvalley_ecommerce/view/screen/home/widget/banners_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sixvalley_ecommerce/localization/language_constrants.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/search_provider.dart';
